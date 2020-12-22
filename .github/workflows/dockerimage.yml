@@ -23,6 +23,8 @@ jobs:
         tag_with_ref: true
         push: false
     - name: Test Helm container
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: GIT_BRANCH=${GITHUB_REF#refs/heads/} make test
     - name: Publish Helm container
       if: ${{ startsWith(github.ref, 'refs/heads/m') || startsWith(github.ref, 'refs/heads/v') }}
